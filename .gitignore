@@ -1,0 +1,46 @@
+# --- data and objects: never tracked ---
+*.h5ad
+*.h5
+*.h5mu
+*.loom
+*.zarr/
+*.mtx
+*.mtx.gz
+*.rds
+*.RDS
+*.rda
+*.RData
+*.npz
+*.npy
+*.pt
+*.ckpt
+*.parquet
+*.feather
+*.tar
+*.tar.gz
+*.zip
+*.gz
+*.bam
+*.fastq*
+data/
+raw/
+cache/
+objects/
+models/
+checkpoints/
+
+# --- outputs ---
+figures_out/
+*.log
+
+# --- python / jupyter / R ---
+__pycache__/
+*.pyc
+.ipynb_checkpoints/
+.Rhistory
+.Rproj.user/
+
+# --- editor / OS ---
+.vscode/
+.idea/
+.DS_Store
