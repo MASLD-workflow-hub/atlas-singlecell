@@ -44,3 +44,6 @@ __pycache__/
 .vscode/
 .idea/
 .DS_Store
+
+# --- personal settings ---
+config/paths.yaml

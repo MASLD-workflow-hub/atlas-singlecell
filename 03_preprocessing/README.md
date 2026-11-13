@@ -1,16 +1,31 @@
 # 03 — Pre-processing
 
-Building each study's object from the raw deposit, and quality control.
+From the downloaded deposits to quality-controlled objects, one per study.
 
-Planned steps:
+## 1. Build the per-study objects
 
-1. Per-study object build (raw counts, gene IDs harmonised, metadata from `02_`).
-2. Compartment-level labels (L0) used to stratify QC.
-3. QC metrics and MAD-based filtering per study × compartment.
-4. Doublet detection (Scrublet / scDblFinder) and ambient RNA (decontX).
-5. Export of the QC-passed objects as input to integration.
+```bash
+python 03_preprocessing/scripts/build_objects.py                         # all 28 studies
+python 03_preprocessing/scripts/build_objects.py --study gribben_2024    # or some
+```
 
-Input: `01_download/` output and `02_metadata_curation/`. Output: QC-passed per-study
-objects (outside git).
+Reads `<data>/01_raw/` (see `01_download/`) and writes `<data>/03_objects/per_study/<study>.h5ad`:
 
-Status: to be filled.
+- `X`: raw counts of every deposited cell of the in-scope samples (cells with zero counts dropped), every deposited gene;
+  `var['gene_id']` where the deposit gives one;
+- `obs`: `study`, `atlas_sample_id`, `suspension_type`, `source_sample_id` and the authors' per-cell metadata as
+  deposited.
+
+Each study has a short recipe in [`scripts/recipes/`](scripts/recipes/) that says how its deposit is read. The
+in-scope samples, and the number of cells each must keep, come from
+[`02_metadata_curation/tables/samples.csv`](../02_metadata_curation/tables/samples.csv). The build stops if any sample
+differs. Studies deposited as Seurat objects (`.rds`) are read through R with Seurat installed: `Rscript` on `PATH`,
+or set `MASLD_RSCRIPT=/path/to/Rscript`.
+
+Objects whose recipe is in the folder have been rebuilt from the downloads and compared cell by cell with the atlas
+objects (same cells, samples, genes and counts). Recipes for the remaining studies are being added.
+
+## 2. Next
+
+Compartment-level labels used to stratify QC (`04_annotation/`), then QC metrics and thresholds per study × chemistry
+× compartment, doublets, ambient RNA (decontX), and the QC ridge plots.

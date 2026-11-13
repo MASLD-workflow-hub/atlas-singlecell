@@ -1,15 +1,16 @@
-# 00 — Data table for the v1 atlas
+# 00 — Data table
 
-Table 1: the studies included in the v1 atlas, with one row per study and a per-sample table.
+Table 1 of the atlas: the 28 studies, one row per study.
 
-Planned files:
+| file | contents |
+|---|---|
+| [`table1_studies.csv`](table1_studies.csv) | publication (DOI, journal, year), accession(s), tissue fraction, capture, platform, disease stage and control source as the source gives them, the stage of each sample in the atlas, and donors / samples / cells deposited and in the atlas |
+| [`table1_footnotes.md`](table1_footnotes.md) | what the columns count, and study-by-study notes on what is included and why |
 
-- `table1_studies.csv`: study, accession(s), technology (cells / nuclei), chemistry,
-  number of donors and samples, disease groups, deposited and retained cell counts.
-- `table1_samples.csv`: one row per sample, with study, donor, disease stage, MONDO term,
-  sex, suspension type and cell counts.
-- `table1_footnotes.md`: inclusion and exclusion decisions, and why.
+| | studies | donors | samples | cells |
+|---|---:|---:|---:|---:|
+| deposited (in scope) | 28 | 356 | 433 | 2,186,795 |
+| in the atlas (Figure 1) | 28 | 337 | 405 | 1,855,148 |
 
-The same tables are the input to `01_download/` (what to fetch) and to `02_metadata_curation/`.
-
-Status: to be filled.
+The `Dataset` column is the study name used everywhere in the code, and `01_download/download_manifest.csv` uses it
+as well.
